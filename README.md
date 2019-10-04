@@ -72,7 +72,7 @@ the utility, so be sure that if you run them verbatim you have a local Postgres
 instance running on your machine, available at port 5433, with a database named
 `raw`. Also be sure to use a [Postgres password
 file](https://www.postgresql.org/docs/current/libpq-pgpass.html) to specify
-credentials for your database's user.
+credentials for your database user.
 
 The example data sets provided under the `examples` folder are subsets of the
 [Private School Universe Survey](https://nces.ed.gov/surveys/pss/) (PSS) for
