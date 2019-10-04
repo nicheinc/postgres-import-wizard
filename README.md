@@ -72,8 +72,9 @@ credentials for your database's user.
 The example data sets provided under the `examples` folder are subsets of the
 [Private School Universe Survey](https://nces.ed.gov/surveys/pss/) (PSS) for
 the 2017-18 school year provided by the National Center for Education
-Statistics. This data set provides a biennial census of private schools in the
-United States of America.
+Statistics. The PSS provides a biennial census of private schools in the United
+States of America and is one of [Niche's data
+sources](https://www.niche.com/about/data/).
 
 ### CSV, Public Schema <a name="csvpublic"></a>
 
