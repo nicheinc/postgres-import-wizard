@@ -83,7 +83,7 @@ private schools in the United States of America.
 
 ### CSV, Public Schema <a name="csvpublic"></a>
 
-Importing the example csv data set provided under `examples` can be done by
+Importing the example CSV data set provided under `examples/` can be done by
 executing
 
 ```sh
@@ -129,8 +129,8 @@ should complete fine.
 ### Tab-Delimited <a name="tab"></a>
 
 The only tricky thing with importing a tab-delimited data file is that we need
-to specify a literal `\t`. This can be accomplished by escaping it in our
-argument list with `$'\t'`, like the following
+to specify a literal `\t` as the delimiter. This can be accomplished by
+escaping it in our argument list with `$'\t'`, like the following
 
 ```sh
 $ python main.py --delimiter $'\t' --file examples/data.txt --table "example2"
