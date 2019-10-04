@@ -9,6 +9,7 @@ Responsible for importing a raw data set into a table in a Postgres database
 - [Examples](#examples)
   - [CSV, Public Schema](#csvpublic)
   - [CSV, Non-Public Schema](#csvnotpublic)
+  - [Tab-Delimited](#tab)
 
 ## About <a name="about"></a>
 
@@ -17,7 +18,7 @@ table in a Postgres database. Other database management systems like Microsoft
 SQL Server offer a graphical import wizard, but Postgres does not. The
 `postgres-import-wizard` (henceforth known as the `wizard`) fills this gap.
 
-The `wizard` is used to copy a flat data file such as a CSV or tab-delimited
+The `wizard` is used to copy a flat-data file such as a CSV or tab-delimited
 text file into a Postgres table. Although Postgres provides a built-in
 [`COPY`](https://www.postgresql.org/docs/current/sql-copy.html) command, it
 requires the table to already exist; otherwise there's nothing to copy the data
@@ -68,6 +69,12 @@ instance running on your machine, available at port 5433, with a database named
 file](https://www.postgresql.org/docs/current/libpq-pgpass.html) to specify
 credentials for your database's user.
 
+The example data sets provided under the `examples` folder are subsets of the
+[Private School Universe Survey](https://nces.ed.gov/surveys/pss/) (PSS) for
+the 2017-18 school year provided by the National Center for Education
+Statistics. This data set provides a biennial census of private schools in the
+United States of America.
+
 ### CSV, Public Schema <a name="csvpublic"></a>
 
 Importing the example csv data set provided under `examples` can be done by
@@ -112,3 +119,13 @@ INFO [2019-10-04 09:12:27] Exiting the wizard. Goodbye.
 Oh no! We need to create the schema before we can create tables in it. After
 creating a schema called `sonic` we can rerun the command above and everything
 should complete fine.
+
+### Tab-Delimited <a name="tab"></a>
+
+The only tricky thing with importing a tab-delimited data file is that we need
+to specify a literal `\t`. This can be accomplished by escaping it in our
+argument list with `$'\t'`, like the following
+
+```sh
+$ python main.py --delimiter $'\t' --file examples/data.txt --table "example2"
+```
