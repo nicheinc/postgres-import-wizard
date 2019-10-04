@@ -59,10 +59,10 @@ optional arguments:
   --table TABLE         Name of table to create (default: None)
 ```
 
-Executing the `wizard` will generate a `logs/` folder in you working directory
-containing a file of the log messages generated during your most recent run.
-These log messages are also printed to your shell. Log settings can be
-configured in `log.py`.
+Executing the `wizard` will print log messages on standard out within your
+shell. It will also persist messages from your most recent run in a file under
+a `logs/` folder in your working directory. Log settings can be configured in
+`log.py`, and the `logs/` folder can safely be removed whenever.
 
 ## Examples <a name="examples"></a>
 
