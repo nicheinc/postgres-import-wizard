@@ -60,7 +60,7 @@ $ python main.py --file examples/data.csv --table "example1"
 Issuing that will load the comma-separated data set into a table named
 `example1` within the default `public` schema of the database.
 
-We can import the data:
+We can reimport the data:
 
 ```sh
 $ python main.py --clean --file examples/data.csv --table "example1"
