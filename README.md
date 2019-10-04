@@ -74,12 +74,12 @@ instance running on your machine, available at port 5433, with a database named
 file](https://www.postgresql.org/docs/current/libpq-pgpass.html) to specify
 credentials for your database user.
 
-The example data sets provided under the `examples` folder are subsets of the
+The example data sets provided under the `examples/` folder are subsets of the
 [Private School Universe Survey](https://nces.ed.gov/surveys/pss/) (PSS) for
 the 2017-18 school year provided by the National Center for Education
 Statistics. The PSS is one of [Niche's data
 sources](https://www.niche.com/about/data/) and provides a biennial census of
-private schools in the United States of America
+private schools in the United States of America.
 
 ### CSV, Public Schema <a name="csvpublic"></a>
 
