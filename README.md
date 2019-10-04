@@ -12,6 +12,19 @@ Responsible for importing a raw data set into a table in a Postgres database
 
 ## About <a name="about"></a>
 
+We often have data in a file on our filesystem and we want to import it into a
+table in a Postgres database. Other database management systems like Microsoft
+SQL Server offer a graphical import wizard, but Postgres does not. The
+`postgres-import-wizard` (henceforth known as the `wizard`) fills this gap.
+
+The `wizard` is used to copy a flat data file such as a CSV or tab-delimited
+text file into a Postgres table. Although Postgres provides a built-in
+[`COPY`](https://www.postgresql.org/docs/current/sql-copy.html) command, it
+requires the table to already exist; otherwise there's nothing to copy the data
+into. To circumvent this issue, the `wizard` reads the header of the file you
+want to load and uses those fields to define a table with `text` columns in
+a database you specify.
+
 ## Installation <a name="installation"></a>
 
 No installation is required. The `wizard` is meant to be run directly from
