@@ -40,7 +40,7 @@ def parse_args():
         '--schema',
         type=str,
         help='Name of schema in which to create table',
-        default='raw'
+        default='public'
     )
     parser.add_argument(
         '--table',
@@ -79,7 +79,6 @@ def main(logger, cur, clean, filename, delimiter, schema, table, fields):
     logger.info('{} rows successfully copied into {}.{}'.format(cur.rowcount, schema, table))
 
 def create_raw_table(cur, schema, table, fields):
-    # Create table
     stmt = sql.SQL("""
         CREATE TABLE {}.{} (
             {} TEXT
@@ -95,7 +94,7 @@ if __name__ == '__main__':
     args = parse_args()
 
     logger = create_logger()
-    logger.info('Job starting')
+    logger.info('Starting the wizard')
 
     try:
         logger.info('Connecting to db')
@@ -133,4 +132,4 @@ if __name__ == '__main__':
         conn.rollback()
         cur.close()
         conn.close()
-        logger.info('Job complete')
+        logger.info('Exiting the wizard. Goodbye.')

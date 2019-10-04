@@ -6,6 +6,8 @@ Responsible for importing a raw data set into a table in a Postgres database
 - [About](#about)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Examples](#examples)
+  - [Basic](#basic)
 
 ## About <a name="about"></a>
 
@@ -29,6 +31,23 @@ optional arguments:
   --postgres_connection POSTGRES_CONNECTION
                         Postgres connection string for raw database (default:
                         postgresql://postgres@localhost:5433/raw)
-  --schema SCHEMA       Name of schema in which to create table (default: raw)
+  --schema SCHEMA       Name of schema in which to create table (default:
+                        public)
   --table TABLE         Name of table to create (default: None)
 ```
+
+## Examples <a name="examples"></a>
+
+In this section we provide a few examples illustrating usage of the `wizard`.
+
+### Basic <a name="basic"></a>
+
+Importing the example csv data set provided under `examples` can be done by
+executing
+
+```sh
+$ python main.py --file examples/data.csv --table "example1"
+```
+
+Issuing that will load the comma-separated data set into a table named
+`example1` within the default `public` schema of the database.
