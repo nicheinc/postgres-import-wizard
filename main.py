@@ -2,7 +2,7 @@ import argparse
 import re
 import sys
 
-from psycopg2 import connect, sql
+from psycopg2 import connect, sql, errors as pgerrors
 
 from log import create_logger
 
@@ -51,8 +51,29 @@ def parse_args():
     return parser.parse_args()
 
 def main(logger, cur, clean, filename, delimiter, schema, table, fields):
-    logger.info('Creating raw data table')
-    create_raw_table(
+    if clean:
+        logger.info('Attempting to drop current data table')
+        # Drop the table that already exists at "schema"."table"
+        # If no such table exists, we will allow that exception to pass
+        # We use savepoints to implement a rollback if the drop throws an error
+        # Since we don't really want to rollback the overall transaction of which
+        # this is only one component
+        try:
+            cur.execute('SAVEPOINT savedrop;')
+            drop_table(
+                cur=cur,
+                schema=schema,
+                table=table
+            )
+            cur.execute('RELEASE SAVEPOINT savedrop;')
+            logger.info('Table dropped')
+        except pgerrors.UndefinedTable:
+            logger.info('No table currently exists there, proceeding to create it')
+            cur.execute('ROLLBACK TO SAVEPOINT savedrop;')
+            pass
+
+    logger.info('Creating data table')
+    create_table(
         cur=cur,
         schema=schema,
         table=table,
@@ -78,7 +99,16 @@ def main(logger, cur, clean, filename, delimiter, schema, table, fields):
 
     logger.info('{} rows successfully copied into {}.{}'.format(cur.rowcount, schema, table))
 
-def create_raw_table(cur, schema, table, fields):
+def drop_table(cur, schema, table):
+    stmt = sql.SQL("""
+        DROP TABLE {}.{};
+    """).format(
+        sql.Identifier(schema),
+        sql.Identifier(table)
+    )
+    cur.execute(stmt)
+
+def create_table(cur, schema, table, fields):
     stmt = sql.SQL("""
         CREATE TABLE {}.{} (
             {} TEXT
