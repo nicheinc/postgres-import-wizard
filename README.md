@@ -7,7 +7,8 @@ Responsible for importing a raw data set into a table in a Postgres database
 - [Installation](#installation)
 - [Usage](#usage)
 - [Examples](#examples)
-  - [Basic, CSV](#basic)
+  - [CSV, Public Schema](#csvpublic)
+  - [CSV, Non-Public Schema](#csvnotpublic)
 
 ## About <a name="about"></a>
 
@@ -47,8 +48,14 @@ optional arguments:
 ## Examples <a name="examples"></a>
 
 In this section we provide a few examples illustrating usage of the `wizard`.
+All examples are run using the default Postgres connection string provided by
+the utility, so be sure that if you run them verbatim you have a local Postgres
+instance running on your machine, available at port 5433, with a database named
+`raw`. Be sure to use a [Postgres password
+file](https://www.postgresql.org/docs/current/libpq-pgpass.html) to specify
+credentials for your database's user.
 
-### Basic, CSV <a name="basic"></a>
+### CSV, Public Schema <a name="csvpublic"></a>
 
 Importing the example csv data set provided under `examples` can be done by
 executing
@@ -72,3 +79,23 @@ like
 ```sh
 CRITICAL [2019-10-04 08:56:20] Exception occurred while loading raw data: relation "example1" already exists
 ```
+
+### CSV, Non-Public Schema <a name="csvnotpublic"></a>
+
+This example functions much the same as [CSV, Public Schema](#csvpublic) above
+except we try to load the data into a non-public schema:
+
+```sh
+$ python main.py --file examples/data.csv --schema "sonic" --table "example1"
+INFO [2019-10-04 09:12:27] Starting the wizard
+...
+CRITICAL [2019-10-04 09:12:27] Exception occurred while loading raw data: schema "sonic" does not exist
+LINE 2:         CREATE TABLE "sonic"."example1" (
+                             ^
+
+INFO [2019-10-04 09:12:27] Exiting the wizard. Goodbye.
+```
+
+Oh no! We need to create the schema before we can create tables in it. After
+creating a schema called `sonic` we can rerun the command above and everything
+should complete fine.
