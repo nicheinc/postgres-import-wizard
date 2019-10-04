@@ -7,11 +7,19 @@ Responsible for importing a raw data set into a table in a Postgres database
 - [Installation](#installation)
 - [Usage](#usage)
 - [Examples](#examples)
-  - [Basic](#basic)
+  - [Basic, CSV](#basic)
 
 ## About <a name="about"></a>
 
 ## Installation <a name="installation"></a>
+
+No installation is required. The `wizard` is meant to be run directly from
+source using Python 3.
+
+That said, it's recommended to run this in a [Python virtual
+environment](https://docs.python.org/3/library/venv.html) and install what's in
+`requirements.txt` (which is really just
+[`psycopg`](http://initd.org/psycopg/)).
 
 ## Usage <a name="usage"></a>
 
@@ -40,7 +48,7 @@ optional arguments:
 
 In this section we provide a few examples illustrating usage of the `wizard`.
 
-### Basic <a name="basic"></a>
+### Basic, CSV <a name="basic"></a>
 
 Importing the example csv data set provided under `examples` can be done by
 executing
@@ -51,3 +59,16 @@ $ python main.py --file examples/data.csv --table "example1"
 
 Issuing that will load the comma-separated data set into a table named
 `example1` within the default `public` schema of the database.
+
+We can import the data:
+
+```sh
+$ python main.py --clean --file examples/data.csv --table "example1"
+```
+
+If we had omitted the `--clean` flag the `wizard` would have thrown an error
+like
+
+```sh
+CRITICAL [2019-10-04 08:56:20] Exception occurred while loading raw data: relation "example1" already exists
+```
