@@ -70,16 +70,16 @@ In this section we provide a few examples illustrating usage of the `wizard`.
 All examples are run using the default Postgres connection string provided by
 the utility, so be sure that if you run them verbatim you have a local Postgres
 instance running on your machine, available at port 5433, with a database named
-`raw`. Be sure to use a [Postgres password
+`raw`. Also be sure to use a [Postgres password
 file](https://www.postgresql.org/docs/current/libpq-pgpass.html) to specify
 credentials for your database's user.
 
 The example data sets provided under the `examples` folder are subsets of the
 [Private School Universe Survey](https://nces.ed.gov/surveys/pss/) (PSS) for
 the 2017-18 school year provided by the National Center for Education
-Statistics. The PSS provides a biennial census of private schools in the United
-States of America and is one of [Niche's data
-sources](https://www.niche.com/about/data/).
+Statistics. The PSS is one of [Niche's data
+sources](https://www.niche.com/about/data/) and provides a biennial census of
+private schools in the United States of America
 
 ### CSV, Public Schema <a name="csvpublic"></a>
 
